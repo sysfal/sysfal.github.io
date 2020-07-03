@@ -28,6 +28,17 @@
         width: 300px;
         height: 300px;
     }
+    .table {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        border-top: 1px solid lightgrey;
+        border-right: 1px solid lightgrey;
+    }
+    .table > span {
+        padding: 8px 4px;
+        border-left: 1px solid lightgrey;
+        border-bottom: 1px solid lightgrey;
+    }
 </style>
 </head>
 <body>
@@ -37,41 +48,70 @@
             <iframe src="https://www.google.com/maps/d/embed?mid=17XEurkeA2KBLZYhOk5uuOjpVwFqM8LOL" width="640" height="480"></iframe>
         </div>
         <div id="walks" class="panel-container"></div>
+        <div id="table" class="table"></div>
     </div>
 <script>
     var walks = [
-        { title: 'Minster Lovell Walk', img: 'IMG_4686.JPG', strava: 'https://www.strava.com/activities/3683301606/embed/1a9c10ee23ccecc84931ab7e7db1aa025092c01b' },
-        { title: 'Bagley Wood Wet Walk', img: 'IMG_4687.JPG', strava: 'https://www.strava.com/activities/3677714828/embed/f2e2d7ae82e9ba1624c7ff2160f863f1321e5394' },
-        { title: 'Wittenham Wood Walk', img: 'IMG_4688.JPG', strava: 'https://www.strava.com/activities/3647926369/embed/ebb8984a39d49b81f2dae1297d9e70b643028f0b' },
-        { title: 'Kintbury Walk', img: 'IMG_4689.JPG', strava: 'https://www.strava.com/activities/3612721516/embed/34d9571a61279e0ea17c6570ffd845173c01bbe8' },
-        { title: 'Farmoor Reservoir Walk', img: 'IMG_4690.JPG', strava: 'https://www.strava.com/activities/3576910305/embed/870d3ff2317b4cfd6de3df2f2ba095039bbe7e1d' },
-        { title: 'Short White Horse Walk', img: 'IMG_4691.JPG', strava: 'https://www.strava.com/activities/3571221688/embed/9dedc2269a9137573b18712c11825ea9104b6c72' },
-        { title: 'Radley Lakes Walk', img: 'IMG_4692.JPG', strava: 'https://www.strava.com/activities/3540469859/embed/5a0e678edb78c4a65c2954881e58aca341360abf' },
-        { title: 'Aston\'s Eyot Walk', img: 'IMG_4693.JPG', strava: 'https://www.strava.com/activities/3535159671/embed/139e4ec290f64a5603b877772d3c0862770c8378' },
-        { title: 'River Walk to Benson', img: 'IMG_4694.JPG', strava: 'https://www.strava.com/activities/3529969280/embed/c5fa5914a9bc84661d9c63a64198111d93977c12' },
-        { title: 'Bagley and West Wood Walk', img: 'IMG_4695.JPG', strava: 'https://www.strava.com/activities/3508420796/embed/de2b6e8c0575dfbc6052d536deafaf75f84274ce' },
-        { title: 'Culham Cut Walk', img: 'IMG_4696.JPG', strava: 'https://www.strava.com/activities/3502888414/embed/5b4fa060f97052feb41d2af05fe2b8379e606a2a' },
-        { title: 'Buscot River Walk', img: 'IMG_4697.JPG', strava: 'https://www.strava.com/activities/3497685049/embed/849319b9455ebcde0af55ef99e1fc054bd2129ab' },
-        { title: 'Pangbourne River Walk', img: 'IMG_4698.JPG', strava: 'https://www.strava.com/activities/3465309783/embed/89dd991cc89c4c5998ca77f1cb2aa927df97ce0e' },
-        { title: 'Boar\'s Hill Walk', img: 'IMG_4699.JPG', strava: 'https://www.strava.com/activities/3459147400/embed/736d8039fb220c12ab2dd27bf80a81bdd7790901' },
-        { title: 'Chilton to Harwell Ride', img: 'IMG_4700.JPG', strava: 'https://www.strava.com/activities/3428937543/embed/8377dff18694f8519ddf060fcf2d2e7e606b67c3' },
-        { title: 'Bagley Wood Walk', img: 'IMG_4701.JPG', strava: 'https://www.strava.com/activities/3423354682/embed/837fed85fd08fe34dd03477916b7769db8b0705b' },
-        { title: 'Dorchester to River Walk', img: 'IMG_4702.JPG', strava: 'https://www.strava.com/activities/3417884357/embed/3c15ce93ef56aaee08f00e4de283f7cac8b6dbd0' },
-        { title: 'Barton Fields Walk', img: 'IMG_4703.JPG', strava: 'https://www.strava.com/activities/3390310079/embed/641369e767e8c107a2b20bcebfa415608d3178f3' },
-        { title: 'Ginge Brook Walk', img: 'IMG_4704.JPG', strava: 'https://www.strava.com/activities/3384248871/embed/9dcd2af7ec52a88f7d28833f6fe4618b85ff5632' },
-        { title: 'Bluebell Walk', img: 'IMG_4705.JPG', strava: 'https://www.strava.com/activities/3355005783/embed/902f433f4696c22b1d8cdd39405e197d8659dfd4' },
-        { title: 'Ridgeway Loop Walk', img: 'IMG_4706.JPG', strava: 'https://www.strava.com/activities/3349790924/embed/e1f2aaea44ea18e60fb5eade055e8e2debecd67f' },
-        { title: 'Icknield Way Ride', img: 'IMG_4707.JPG', strava: 'https://www.strava.com/activities/3321949778/embed/0118deea52192b5d34a4133391e82c8f54e05616' },
-        { title: 'Round Lab Ride', img: 'IMG_4708.JPG', strava: 'https://www.strava.com/activities/3253191842/embed/8788066f2e2f3db0a4046023f6f44bbef3c315e8' },
+        { title: 'Round Labs Walk', date: '2020-07-03', distance: 7.4, img: 'IMG_4723.JPG', strava: 'https://www.strava.com/activities/round-labs-walk-3706497856?utm_campaign=ride_share&utm_content=2768767&utm_medium=widget'},
+        { title: 'Minster Lovell Walk', date: '2020-06-28', distance: 5.7, img: 'IMG_4686.JPG', strava: 'https://www.strava.com/activities/3683301606/embed/1a9c10ee23ccecc84931ab7e7db1aa025092c01b' },
+        { title: 'Bagley Wood Wet Walk', date: '2020-06-27', distance: 4.5, img: 'IMG_4687.JPG', strava: 'https://www.strava.com/activities/3677714828/embed/f2e2d7ae82e9ba1624c7ff2160f863f1321e5394' },
+        { title: 'Wittenham Wood Walk', date: '2020-06-21', distance: 4.3, img: 'IMG_4688.JPG', strava: 'https://www.strava.com/activities/3647926369/embed/ebb8984a39d49b81f2dae1297d9e70b643028f0b' },
+        { title: 'Kintbury Walk', date: '2020-06-14', distance: 4.8, img: 'IMG_4689.JPG', strava: 'https://www.strava.com/activities/3612721516/embed/34d9571a61279e0ea17c6570ffd845173c01bbe8' },
+        { title: 'Farmoor Reservoir Walk', date: '2020-06-07', distance: 6.1, img: 'IMG_4690.JPG', strava: 'https://www.strava.com/activities/3576910305/embed/870d3ff2317b4cfd6de3df2f2ba095039bbe7e1d' },
+        { title: 'Short White Horse Walk', date: '2020-06-06', distance: 2.0, img: 'IMG_4691.JPG', strava: 'https://www.strava.com/activities/3571221688/embed/9dedc2269a9137573b18712c11825ea9104b6c72' },
+        { title: 'Radley Lakes Walk', date: '2020-05-31', distance: 2.4, img: 'IMG_4692.JPG', strava: 'https://www.strava.com/activities/3540469859/embed/5a0e678edb78c4a65c2954881e58aca341360abf' },
+        { title: 'Aston\'s Eyot Walk', date: '2020-05-30', distance: 3.6, img: 'IMG_4693.JPG', strava: 'https://www.strava.com/activities/3535159671/embed/139e4ec290f64a5603b877772d3c0862770c8378' },
+        { title: 'River Walk to Benson', date: '2020-05-29', distance: 3.9, img: 'IMG_4694.JPG', strava: 'https://www.strava.com/activities/3529969280/embed/c5fa5914a9bc84661d9c63a64198111d93977c12' },
+        { title: 'Bagley and West Wood Walk', date: '2020-05-25', distance: 5.4, img: 'IMG_4695.JPG', strava: 'https://www.strava.com/activities/3508420796/embed/de2b6e8c0575dfbc6052d536deafaf75f84274ce' },
+        { title: 'Culham Cut Walk', date: '2020-05-24', distance: 3.8, img: 'IMG_4696.JPG', strava: 'https://www.strava.com/activities/3502888414/embed/5b4fa060f97052feb41d2af05fe2b8379e606a2a' },
+        { title: 'Buscot River Walk', date: '2020-05-23', distance: 5.8, img: 'IMG_4697.JPG', strava: 'https://www.strava.com/activities/3497685049/embed/849319b9455ebcde0af55ef99e1fc054bd2129ab' },
+        { title: 'Pangbourne River Walk', date: '2020-05-17', distance: 3.4, img: 'IMG_4698.JPG', strava: 'https://www.strava.com/activities/3465309783/embed/89dd991cc89c4c5998ca77f1cb2aa927df97ce0e' },
+        { title: 'Boar\'s Hill Walk', date: '2020-05-16', distance: 3.8, img: 'IMG_4699.JPG', strava: 'https://www.strava.com/activities/3459147400/embed/736d8039fb220c12ab2dd27bf80a81bdd7790901' },
+        { title: 'Chilton to Harwell Ride', date: '2020-05-10', distance: 8.4, img: 'IMG_4700.JPG', strava: 'https://www.strava.com/activities/3428937543/embed/8377dff18694f8519ddf060fcf2d2e7e606b67c3' },
+        { title: 'Bagley Wood Walk', date: '2020-05-09', distance: 1.9, img: 'IMG_4701.JPG', strava: 'https://www.strava.com/activities/3423354682/embed/837fed85fd08fe34dd03477916b7769db8b0705b' },
+        { title: 'Dorchester to River Walk', date: '2020-05-08', distance: 4.0, img: 'IMG_4702.JPG', strava: 'https://www.strava.com/activities/3417884357/embed/3c15ce93ef56aaee08f00e4de283f7cac8b6dbd0' },
+        { title: 'Barton Fields Walk', date: '2020-05-03', distance: 2.6, img: 'IMG_4703.JPG', strava: 'https://www.strava.com/activities/3390310079/embed/641369e767e8c107a2b20bcebfa415608d3178f3' },
+        { title: 'Ginge Brook Walk', date: '2020-05-02', distance: 3.6, img: 'IMG_4704.JPG', strava: 'https://www.strava.com/activities/3384248871/embed/9dcd2af7ec52a88f7d28833f6fe4618b85ff5632' },
+        { title: 'Bluebell Walk', date: '2020-04-26', distance: 2.6, img: 'IMG_4705.JPG', strava: 'https://www.strava.com/activities/3355005783/embed/902f433f4696c22b1d8cdd39405e197d8659dfd4' },
+        { title: 'Ridgeway Loop Walk', date: '2020-04-25', distance: 6.3, img: 'IMG_4706.JPG', strava: 'https://www.strava.com/activities/3349790924/embed/e1f2aaea44ea18e60fb5eade055e8e2debecd67f' },
+        { title: 'Icknield Way Ride', date: '2020-04-19', distance: 5.7, img: 'IMG_4707.JPG', strava: 'https://www.strava.com/activities/3321949778/embed/0118deea52192b5d34a4133391e82c8f54e05616' },
+        { title: 'Round Lab Ride', date: '2020-04-04', distance: 8.7, img: 'IMG_4708.JPG', strava: 'https://www.strava.com/activities/3253191842/embed/8788066f2e2f3db0a4046023f6f44bbef3c315e8' },
     ];
-    walks.forEach(e => {
+    var totalDistance = 0;
+    /*walks.forEach(e => {
         console.log('Walk: ' + e.title);
+        totalDistance += e.distance;
         const div = document.createElement('div');
         div.className = 'walk-panel';
         div.innerHTML = `<a href="${e.strava}"><div class="title">${e.title}</div>
         <img class="map" src="${e.img}" alt="Walk map"></a>`;
         document.getElementById('walks').appendChild(div);
+    });*/
+    walks.forEach(e => {
+        e.date = new Date(Date.parse(e.date));
     });
+    walks.sort(function(a,b){ return a.date - b.date; });
+
+    function appendChildToElement(elementId, childTag, childHtml) {
+        const span = document.createElement(childTag);
+        span.innerHTML = childHtml;
+        document.getElementById(elementId).appendChild(span);
+    }
+
+    // create table
+    appendChildToElement('table', 'span', `<strong>Date</strong>`);
+    appendChildToElement('table', 'span', `<strong>Name</strong>`);
+    appendChildToElement('table', 'span', `<strong>Distance (km)</strong>`);
+    appendChildToElement('table', 'span', `<strong>Route</strong>`);
+    walks.forEach(e => {
+        appendChildToElement('table', 'span', e.date.getFullYear() + '-' + e.date.getMonth() + '-' + e.date.getDate());
+        appendChildToElement('table', 'span', e.title);
+        appendChildToElement('table', 'span', e.distance.toFixed(1));
+        appendChildToElement('table', 'span', `<img class="map" src="${e.img}" alt="route">`);
+    });
+    // end table
+
+    console.log('totalDistance: ' + totalDistance);
 </script>
 </body>
 </html>
