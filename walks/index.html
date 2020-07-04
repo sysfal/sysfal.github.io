@@ -52,6 +52,7 @@
     </div>
 <script>
     var walks = [
+        { title: 'Bowdown Woods Walk', date: '2020-07-04', distance: 2.8, img: 'IMG_4730.JPG', strava: 'https://www.strava.com/activities/bowdown-woods-walk-3711169914?utm_campaign=ride_share&utm_content=2768767&utm_medium=widget'},
         { title: 'Round Labs Walk', date: '2020-07-03', distance: 7.4, img: 'IMG_4723.JPG', strava: 'https://www.strava.com/activities/round-labs-walk-3706497856?utm_campaign=ride_share&utm_content=2768767&utm_medium=widget'},
         { title: 'Minster Lovell Walk', date: '2020-06-28', distance: 5.7, img: 'IMG_4686.JPG', strava: 'https://www.strava.com/activities/3683301606/embed/1a9c10ee23ccecc84931ab7e7db1aa025092c01b' },
         { title: 'Bagley Wood Wet Walk', date: '2020-06-27', distance: 4.5, img: 'IMG_4687.JPG', strava: 'https://www.strava.com/activities/3677714828/embed/f2e2d7ae82e9ba1624c7ff2160f863f1321e5394' },
@@ -80,7 +81,6 @@
     var totalDistance = 0;
     /*walks.forEach(e => {
         console.log('Walk: ' + e.title);
-        totalDistance += e.distance;
         const div = document.createElement('div');
         div.className = 'walk-panel';
         div.innerHTML = `<a href="${e.strava}"><div class="title">${e.title}</div>
@@ -89,6 +89,7 @@
     });*/
     walks.forEach(e => {
         e.date = new Date(Date.parse(e.date));
+        totalDistance += e.distance;
     });
     walks.sort(function(a,b){ return a.date - b.date; });
 
