@@ -1,10 +1,68 @@
-<h1>Art</h1>
+<!DOCTYPE html>
+<html>
 
-<h2>Beach</h2>
-<img src="beach_ada.png" alt="Beach by Ada" width="400">
-<img src="beach_simon.png" alt="Beach by Simon" width="400">
+<head>
+    <link href="https://fonts.googleapis.com/css2?family=Oxygen:wght@300&display=swap" rel="stylesheet">
+    <title>Lockdown Walks & Rides</title>
+    <style>
+        body {
+            margin: 20px;
+            font-family: 'Oxygen', sans-serif;
+        }
 
-<h2>Forest</h2>
-<img src="forest_ada.png" alt="Forest by Ada" width="400">
-<img src="forest_simon.png" alt="Forest by Simon" width="400">
+        .title {
+            font-size: large;
+        }
 
+        .sub-title {
+            font-size: medium;
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+
+        .section {
+            display: flex;
+            flex-direction: row;
+        }
+
+        .art {
+            display: flex;
+            flex-direction: column;
+            margin-right: 40px;
+        }
+
+        .art-title {
+            text-align: right;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="title">Art</div>
+
+    <div class="sub-title">Beach</div>
+    <div class="section">
+        <div class="art">
+            <img src="beach_ada.png" alt="Beach by Ada" height="300">
+            <div class="art-title">Beach by Ada</div>
+        </div>
+        <div class="art">
+            <img src="beach_simon.png" alt="Beach by Simon" height="300">
+            <div class="art-title">Beach by Simon</div>
+        </div>
+    </div>
+
+    <div class="sub-title">Forest</div>
+    <div class="section">
+        <div class="art">
+            <img src="forest_ada.png" alt="Forest by Ada" height="300">
+            <div class="art-title">Forest by Ada</div>
+        </div>
+        <div class="art">
+            <img src="forest_simon.png" alt="Forest by Simon" height="300">
+            <div class="art-title">Forest by Simon</div>
+        </div>
+    </div>
+</body>
+
+</html>
